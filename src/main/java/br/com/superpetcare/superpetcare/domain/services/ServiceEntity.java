@@ -1,5 +1,7 @@
 package br.com.superpetcare.superpetcare.domain.services;
 
+import br.com.superpetcare.superpetcare.domain.services.dao.RegisterService;
+import br.com.superpetcare.superpetcare.domain.services.dao.UpdateService;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

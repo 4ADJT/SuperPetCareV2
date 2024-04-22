@@ -1,6 +1,8 @@
 package br.com.superpetcare.superpetcare.domain.pet;
 
 import br.com.superpetcare.superpetcare.domain.guardian.GuardianEntity;
+import br.com.superpetcare.superpetcare.domain.pet.dao.RegisterPet;
+import br.com.superpetcare.superpetcare.domain.pet.dao.UpdatePet;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

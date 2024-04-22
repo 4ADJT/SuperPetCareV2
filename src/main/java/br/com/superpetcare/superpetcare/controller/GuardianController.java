@@ -1,6 +1,10 @@
 package br.com.superpetcare.superpetcare.controller;
 
 import br.com.superpetcare.superpetcare.domain.guardian.*;
+import br.com.superpetcare.superpetcare.domain.guardian.dao.RegisterGuardian;
+import br.com.superpetcare.superpetcare.domain.guardian.dao.UpdateGuardian;
+import br.com.superpetcare.superpetcare.domain.guardian.dto.DetailGuardian;
+import br.com.superpetcare.superpetcare.domain.guardian.dto.SimpleGuardian;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
