@@ -1,6 +1,6 @@
 package br.com.superpetcare.superpetcare.controller;
 
-import br.com.superpetcare.superpetcare.components.ComponentPayment;
+import br.com.superpetcare.superpetcare.domain.payment.ComponentPayment;
 import br.com.superpetcare.superpetcare.domain.payment.*;
 import br.com.superpetcare.superpetcare.domain.payment.dao.ResgiterPayment;
 import br.com.superpetcare.superpetcare.domain.payment.dao.UpdatePayment;

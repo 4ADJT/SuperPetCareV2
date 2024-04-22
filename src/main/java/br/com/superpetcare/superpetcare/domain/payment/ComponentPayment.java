@@ -1,9 +1,7 @@
-package br.com.superpetcare.superpetcare.components;
+package br.com.superpetcare.superpetcare.domain.payment;
 
 import br.com.superpetcare.superpetcare.domain.cart.CartRepository;
 import br.com.superpetcare.superpetcare.services.ServiceCart;
-import br.com.superpetcare.superpetcare.domain.payment.PaymentEntity;
-import br.com.superpetcare.superpetcare.domain.payment.PaymentRepository;
 import br.com.superpetcare.superpetcare.services.ServicePayment;
 import br.com.superpetcare.superpetcare.domain.payment.dao.ResgiterPayment;
 import br.com.superpetcare.superpetcare.domain.payment.dto.DetailPayment;
