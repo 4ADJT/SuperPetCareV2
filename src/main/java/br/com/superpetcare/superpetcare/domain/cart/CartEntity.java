@@ -1,5 +1,6 @@
 package br.com.superpetcare.superpetcare.domain.cart;
 
+import br.com.superpetcare.superpetcare.domain.cart.dao.UpdateCart;
 import br.com.superpetcare.superpetcare.domain.pet.PetEntity;
 import br.com.superpetcare.superpetcare.domain.services.ServiceEntity;
 import jakarta.persistence.*;
@@ -39,4 +40,7 @@ public class CartEntity {
         this.services = listServices;
     }
 
+    public void update(UpdateCart updateCart) {
+        this.services = updateCart.services();
+    }
 }

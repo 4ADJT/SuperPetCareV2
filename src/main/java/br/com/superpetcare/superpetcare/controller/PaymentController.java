@@ -1,14 +1,14 @@
 package br.com.superpetcare.superpetcare.controller;
 
-import br.com.superpetcare.superpetcare.domain.cart.CartRepository;
-import br.com.superpetcare.superpetcare.domain.cart.DetailCart;
-import br.com.superpetcare.superpetcare.domain.cart.ServiceCart;
+import br.com.superpetcare.superpetcare.components.ComponentPayment;
 import br.com.superpetcare.superpetcare.domain.payment.*;
-import br.com.superpetcare.superpetcare.domain.services.DetailService;
+import br.com.superpetcare.superpetcare.domain.payment.dao.ResgiterPayment;
+import br.com.superpetcare.superpetcare.domain.payment.dao.UpdatePayment;
+import br.com.superpetcare.superpetcare.domain.payment.dto.DetailPayment;
+import br.com.superpetcare.superpetcare.domain.payment.dto.SimplePayment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,19 +28,10 @@ import java.util.UUID;
 public class PaymentController {
 
     @Autowired
-    ServiceCart serviceCart;
-
-    @Autowired
-    ServicePayment servicePayment;
+    ComponentPayment componentPayment;
 
     @Autowired
     PaymentRepository paymentRepository;
-
-    @Autowired
-    CartRepository cartRepository;
-
-    @Autowired
-    ComponentPayment componentPayment;
 
     @PostMapping
     @Transactional
@@ -67,13 +57,10 @@ public class PaymentController {
     }
 
     @GetMapping("/cart/{cartId}")
-    @Operation(summary = "previaPagamento", description = "Método responsável exibir a previa do pagamento.")
+    @Operation(summary = "previa do Pagamento", description = "Método responsável exibir a previa do pagamento.")
     public ResponseEntity<DetailPayment> previewPayment(@PathVariable UUID cartId) {
-
         DetailPayment payment = componentPayment.previewPayment(cartId);
-
         return ResponseEntity.ok(payment);
-
     }
 
     @PutMapping("/{id}")

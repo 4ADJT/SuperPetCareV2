@@ -1,7 +1,10 @@
 package br.com.superpetcare.superpetcare.controller;
 
-import br.com.superpetcare.superpetcare.domain.guardian.GuardianRepository;
 import br.com.superpetcare.superpetcare.domain.pet.*;
+import br.com.superpetcare.superpetcare.domain.pet.dao.RegisterPet;
+import br.com.superpetcare.superpetcare.domain.pet.dao.UpdatePet;
+import br.com.superpetcare.superpetcare.domain.pet.dto.DetailPet;
+import br.com.superpetcare.superpetcare.domain.pet.dto.SimplePet;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,21 +27,28 @@ import java.util.UUID;
 public class PetController {
 
     @Autowired
-    GuardianRepository guardianRepository;
+    PetRepository petRepository;
 
     @Autowired
-    PetRepository petRepository;
+    ComponentPet componentPet;
 
     @PostMapping
     @Transactional
     @Operation(summary = "Registar Pet", description = "Método responsável registar o pet.")
     public ResponseEntity<DetailPet> registerPet(@RequestBody @Valid RegisterPet registerPet, UriComponentsBuilder componentsBuilder) {
-        var guardian = guardianRepository.getReferenceById(registerPet.guardianId());
-        var pet = new PetEntity(registerPet, guardian);
-        petRepository.save(pet);
-        var uri = componentsBuilder.path("pet/{id}").buildAndExpand(pet.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DetailPet(pet));
+        PetEntity petEntity = componentPet.registerPet(registerPet);
+        petRepository.save(petEntity);
+        var uri = componentsBuilder.path("pet/{id}").buildAndExpand(petEntity.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DetailPet(petEntity));
+    }
 
+    @GetMapping("/{id}")
+    @Operation(summary = "Detalher Pet", description = "Método responsável detalhar dados so pet.")
+    public ResponseEntity<DetailPet> datailPet(@PathVariable UUID id) {
+        var optionalPetEntity = petRepository.findById(id);
+        return optionalPetEntity.map(
+                petEntity -> ResponseEntity.ok(new DetailPet(petEntity))
+        ).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping

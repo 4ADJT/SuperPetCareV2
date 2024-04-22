@@ -1,6 +1,7 @@
 package br.com.superpetcare.superpetcare.domain.payment;
 
 import br.com.superpetcare.superpetcare.domain.cart.CartEntity;
+import br.com.superpetcare.superpetcare.domain.payment.dao.UpdatePayment;
 import br.com.superpetcare.superpetcare.domain.services.ServiceEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

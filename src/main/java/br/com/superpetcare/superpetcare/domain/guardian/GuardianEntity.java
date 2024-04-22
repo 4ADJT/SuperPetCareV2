@@ -1,12 +1,16 @@
 package br.com.superpetcare.superpetcare.domain.guardian;
 
 import br.com.superpetcare.superpetcare.domain.address.AddressEntity;
+import br.com.superpetcare.superpetcare.domain.guardian.dao.RegisterGuardian;
+import br.com.superpetcare.superpetcare.domain.guardian.dao.UpdateGuardian;
+import br.com.superpetcare.superpetcare.domain.pet.PetEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -29,20 +33,15 @@ public class GuardianEntity {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private AddressEntity address;
 
+    @OneToMany(mappedBy = "guardian")
+    private List<PetEntity> pets;
+
     public GuardianEntity(RegisterGuardian registerGuardian) {
         firstName = registerGuardian.firstName();
         lastName = registerGuardian.lastName();
         email = registerGuardian.email();
         phone = registerGuardian.phone();
         address = new AddressEntity(registerGuardian.address());
-    }
-
-    public GuardianEntity(GuardianEntity guardian) {
-        id = guardian.id;
-        firstName = guardian.firstName;
-        lastName = guardian.lastName;
-        email = guardian.email;
-        phone = guardian.phone;
     }
 
     public void updateData(UpdateGuardian updateGuardian) {

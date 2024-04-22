@@ -1,13 +1,15 @@
 package br.com.superpetcare.superpetcare.controller;
 
+import br.com.superpetcare.superpetcare.components.ComponentCart;
 import br.com.superpetcare.superpetcare.domain.cart.*;
+import br.com.superpetcare.superpetcare.domain.cart.dao.RegisterCart;
+import br.com.superpetcare.superpetcare.domain.cart.dao.UpdateCart;
+import br.com.superpetcare.superpetcare.domain.cart.dto.DetailCart;
 import br.com.superpetcare.superpetcare.domain.pet.PetRepository;
-import br.com.superpetcare.superpetcare.domain.services.DetailService;
 import br.com.superpetcare.superpetcare.domain.services.ServiceRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -44,10 +44,8 @@ public class CartController {
     @Transactional
     @Operation(summary = "Registra Carinho", description = "Método responsável exibir registar o carinho.")
     public ResponseEntity<DetailCart> registerCart(@RequestBody @Valid RegisterCart registerCart, UriComponentsBuilder componentsBuilder) {
-
         CartEntity cartEntity = componentCart.registerCart(registerCart);
         cartRepository.save(cartEntity);
-
         var uri = componentsBuilder.path("cart/{id}").buildAndExpand(cartEntity.getId()).toUri();
         return ResponseEntity.created(uri).body(new DetailCart(cartEntity));
 
@@ -56,8 +54,10 @@ public class CartController {
     @GetMapping("/{id}")
     @Operation(summary = "Detalhar carinho", description = "Método responsável exibir detalhes do carinho.")
     public ResponseEntity<DetailCart> detailCats(@PathVariable UUID id) {
-        var cart = cartRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No value present"));
-        return ResponseEntity.ok(new DetailCart(cart));
+        var optionalCartEntity = cartRepository.findById(id);
+        return optionalCartEntity.map(cartEntity ->
+                ResponseEntity.ok(new DetailCart(cartEntity))
+        ).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping
@@ -67,5 +67,19 @@ public class CartController {
         return ResponseEntity.ok(page);
     }
 
+    @PutMapping("/{id}")
+    @Operation(summary = "Alterar Carinho", description = "Método responsável alterar os dados do carinho.")
+    public ResponseEntity<DetailCart> updateCart(@PathVariable UUID id, @RequestBody @Valid UpdateCart updateCart) {
+        var cartEntity = cartRepository.getReferenceById(id);
+        cartEntity.update(updateCart);
+        return ResponseEntity.ok(new DetailCart(cartEntity));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Excluir Carinho", description = "Método responsável excluir carinho.")
+    public ResponseEntity deleteCart(@PathVariable UUID id) {
+        cartRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
