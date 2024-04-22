@@ -1,6 +1,6 @@
 package br.com.superpetcare.superpetcare.controller;
 
-import br.com.superpetcare.superpetcare.components.ComponentCart;
+import br.com.superpetcare.superpetcare.domain.cart.ComponentCart;
 import br.com.superpetcare.superpetcare.domain.cart.*;
 import br.com.superpetcare.superpetcare.domain.cart.dao.RegisterCart;
 import br.com.superpetcare.superpetcare.domain.cart.dao.UpdateCart;

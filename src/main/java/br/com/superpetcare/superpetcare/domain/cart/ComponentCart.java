@@ -1,6 +1,5 @@
-package br.com.superpetcare.superpetcare.components;
+package br.com.superpetcare.superpetcare.domain.cart;
 
-import br.com.superpetcare.superpetcare.domain.cart.CartEntity;
 import br.com.superpetcare.superpetcare.domain.cart.dao.RegisterCart;
 import br.com.superpetcare.superpetcare.domain.pet.PetRepository;
 import br.com.superpetcare.superpetcare.domain.services.ServiceRepository;
