@@ -11,11 +11,12 @@ public record DetailCart(
         DetailPet pet,
         List<DetailService> services
 ) {
-    public DetailCart(CartEntity purchase, List<DetailService> detailServices) {
+
+    public DetailCart(CartEntity cart) {
         this(
-                purchase.getId(),
-                new DetailPet(purchase.getPet()),
-                detailServices
+                cart.getId(),
+                new DetailPet(cart.getPet()),
+                cart.getServices().stream().map(DetailService::new).toList()
         );
     }
 }

@@ -1,6 +1,8 @@
 package br.com.superpetcare.superpetcare.domain.payment;
 
+import br.com.superpetcare.superpetcare.domain.cart.CartEntity;
 import br.com.superpetcare.superpetcare.domain.cart.DetailCart;
+import br.com.superpetcare.superpetcare.domain.services.ServiceEntity;
 
 import java.util.Date;
 import java.util.UUID;
@@ -13,23 +15,23 @@ public record DetailPayment(
         Date paymentDate
 ) {
 
-    public DetailPayment(double totalAmaunt, DetailCart detailCart) {
+    public DetailPayment(CartEntity cartEntity) {
         this(
                 null,
-                detailCart,
-                totalAmaunt,
+                new DetailCart(cartEntity),
+                cartEntity.getServices().stream().mapToDouble(ServiceEntity::getPrice).sum(),
                 PaymentStatus.PENDING,
                 null
         );
     }
 
-    public DetailPayment(PaymentEntity paymentEntity, DetailCart detailCart) {
+    public DetailPayment(PaymentEntity payment) {
         this(
-                paymentEntity.getId(),
-                detailCart,
-                paymentEntity.getTotalAmount(),
-                paymentEntity.getPaymentStatus(),
-                paymentEntity.getPaymentDate()
+                payment.getId(),
+                new DetailCart(payment.getCart()),
+                payment.getTotalAmount(),
+                payment.getPaymentStatus(),
+                payment.getPaymentDate()
         );
     }
 }

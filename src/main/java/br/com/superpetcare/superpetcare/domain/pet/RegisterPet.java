@@ -1,6 +1,5 @@
 package br.com.superpetcare.superpetcare.domain.pet;
 
-import br.com.superpetcare.superpetcare.domain.guardian.GuardianEntity;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;

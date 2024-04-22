@@ -1,7 +1,5 @@
 package br.com.superpetcare.superpetcare.domain.guardian;
 
-import br.com.superpetcare.superpetcare.domain.address.DetailAddress;
-
 import java.util.UUID;
 
 public record SimpleGuardian(
