@@ -1,7 +1,7 @@
 package br.com.superpetcare.superpetcare.infra.security;
 
-import br.com.superpetcare.superpetcare.infra.exception.ValidatorException;
 import br.com.superpetcare.superpetcare.domain.user.UserEntity;
+import br.com.superpetcare.superpetcare.infra.exception.ValidatorException;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;

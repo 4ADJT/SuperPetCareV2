@@ -1,6 +1,7 @@
 package br.com.superpetcare.superpetcare.domain.payment;
 
 import br.com.superpetcare.superpetcare.domain.cart.CartEntity;
+import br.com.superpetcare.superpetcare.domain.services.ServiceEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -28,15 +29,15 @@ public class PaymentEntity {
     private PaymentStatus paymentStatus;
     private Date paymentDate;
 
-    public PaymentEntity(CartEntity cartEntity, double totalAmaunt) {
+    public PaymentEntity(CartEntity cartEntity) {
         this.cart = cartEntity;
-        this.totalAmount = totalAmaunt;
+        this.totalAmount = cartEntity.getServices()
+                .stream().mapToDouble(ServiceEntity::getPrice).sum();
         this.paymentStatus = PaymentStatus.PENDING;
         this.paymentDate = new Date();
     }
 
     public void update(UpdatePayment updatePayment) {
         this.paymentStatus = updatePayment.paymentStatus();
-
     }
 }

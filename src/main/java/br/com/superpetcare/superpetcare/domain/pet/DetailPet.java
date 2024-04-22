@@ -1,8 +1,6 @@
 package br.com.superpetcare.superpetcare.domain.pet;
 
 import br.com.superpetcare.superpetcare.domain.guardian.DetailGuardian;
-import br.com.superpetcare.superpetcare.domain.guardian.GuardianEntity;
-import jakarta.persistence.*;
 
 import java.util.UUID;
 

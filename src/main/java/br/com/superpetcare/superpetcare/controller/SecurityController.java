@@ -5,7 +5,6 @@ import br.com.superpetcare.superpetcare.domain.user.UserEntity;
 import br.com.superpetcare.superpetcare.infra.security.DataTokenJWT;
 import br.com.superpetcare.superpetcare.infra.security.TokenService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

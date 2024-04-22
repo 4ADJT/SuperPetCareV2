@@ -1,41 +1,45 @@
 package br.com.superpetcare.superpetcare.domain.payment;
 
-import br.com.superpetcare.superpetcare.domain.cart.CartEntity;
-import br.com.superpetcare.superpetcare.domain.cart.DetailCart;
+import br.com.superpetcare.superpetcare.domain.cart.*;
 import br.com.superpetcare.superpetcare.domain.services.DetailService;
+import br.com.superpetcare.superpetcare.domain.services.ServiceEntity;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
 public class ComponentPayment {
 
     @Autowired
-    private PaymentRepository paymentRepository;
+    ServiceCart serviceCart;
 
-    public double totalAmauntOfServices(DetailCart cart) {
-        return cart.services().stream().mapToDouble(DetailService::price).sum();
-    }
+    @Autowired
+    ServicePayment servicePayment;
 
-    public PaymentEntity findDetailPayment(UUID paymentId) {
-        return paymentRepository.getReferenceById(paymentId);
-    }
+    @Autowired
+    PaymentRepository paymentRepository;
 
-    public PaymentEntity save(CartEntity cartEntity, double totalAmaunt) {
+    @Autowired
+    CartRepository cartRepository;
+
+    public PaymentEntity registerPayment(ResgiterPayment resgiterPayment) {
+        var optionalCartEntity = cartRepository.findById(resgiterPayment.cartId());
         return paymentRepository.save(
-                new PaymentEntity(cartEntity, totalAmaunt)
+                new PaymentEntity(
+                        optionalCartEntity.orElseThrow(() -> new EntityNotFoundException("Cart not found"))
+                ));
+    }
+
+    public DetailPayment previewPayment(UUID cartId) {
+        var optionalCartEntity = cartRepository.findById(cartId);
+        return new DetailPayment(
+                optionalCartEntity.orElseThrow(() -> new EntityNotFoundException("Cart not found"))
         );
+
     }
 
-    public PaymentEntity findPaymentEntity(UUID id) {
-        return paymentRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("No value present"));
-    }
-
-    public List<PaymentEntity> listPayments() {
-        return paymentRepository.findAll();
-    }
 }

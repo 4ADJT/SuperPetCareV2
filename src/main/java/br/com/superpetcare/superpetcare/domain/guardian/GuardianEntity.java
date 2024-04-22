@@ -2,7 +2,10 @@ package br.com.superpetcare.superpetcare.domain.guardian;
 
 import br.com.superpetcare.superpetcare.domain.address.AddressEntity;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
