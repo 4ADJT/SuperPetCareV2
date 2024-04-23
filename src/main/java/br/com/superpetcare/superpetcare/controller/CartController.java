@@ -1,12 +1,11 @@
 package br.com.superpetcare.superpetcare.controller;
 
+import br.com.superpetcare.superpetcare.domain.cart.CartEntity;
+import br.com.superpetcare.superpetcare.domain.cart.CartRepository;
 import br.com.superpetcare.superpetcare.domain.cart.ComponentCart;
-import br.com.superpetcare.superpetcare.domain.cart.*;
 import br.com.superpetcare.superpetcare.domain.cart.dao.RegisterCart;
 import br.com.superpetcare.superpetcare.domain.cart.dao.UpdateCart;
 import br.com.superpetcare.superpetcare.domain.cart.dto.DetailCart;
-import br.com.superpetcare.superpetcare.domain.pet.PetRepository;
-import br.com.superpetcare.superpetcare.domain.services.ServiceRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,12 +26,6 @@ import java.util.UUID;
 @SecurityRequirement(name = "bearer-key")
 @Tag(name = "Cart of Services API")
 public class CartController {
-
-    @Autowired
-    private PetRepository petRepository;
-
-    @Autowired
-    private ServiceRepository serviceRepository;
 
     @Autowired
     private CartRepository cartRepository;

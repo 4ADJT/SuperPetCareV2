@@ -1,6 +1,7 @@
 package br.com.superpetcare.superpetcare.controller;
 
-import br.com.superpetcare.superpetcare.domain.services.*;
+import br.com.superpetcare.superpetcare.domain.services.ServiceEntity;
+import br.com.superpetcare.superpetcare.domain.services.ServiceRepository;
 import br.com.superpetcare.superpetcare.domain.services.dao.RegisterService;
 import br.com.superpetcare.superpetcare.domain.services.dao.UpdateService;
 import br.com.superpetcare.superpetcare.domain.services.dto.DetailService;

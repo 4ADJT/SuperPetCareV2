@@ -1,6 +1,8 @@
 package br.com.superpetcare.superpetcare.controller;
 
-import br.com.superpetcare.superpetcare.domain.pet.*;
+import br.com.superpetcare.superpetcare.domain.pet.ComponentPet;
+import br.com.superpetcare.superpetcare.domain.pet.PetEntity;
+import br.com.superpetcare.superpetcare.domain.pet.PetRepository;
 import br.com.superpetcare.superpetcare.domain.pet.dao.RegisterPet;
 import br.com.superpetcare.superpetcare.domain.pet.dao.UpdatePet;
 import br.com.superpetcare.superpetcare.domain.pet.dto.DetailPet;

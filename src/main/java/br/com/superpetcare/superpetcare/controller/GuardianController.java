@@ -1,6 +1,7 @@
 package br.com.superpetcare.superpetcare.controller;
 
-import br.com.superpetcare.superpetcare.domain.guardian.*;
+import br.com.superpetcare.superpetcare.domain.guardian.GuardianEntity;
+import br.com.superpetcare.superpetcare.domain.guardian.GuardianRepository;
 import br.com.superpetcare.superpetcare.domain.guardian.dao.RegisterGuardian;
 import br.com.superpetcare.superpetcare.domain.guardian.dao.UpdateGuardian;
 import br.com.superpetcare.superpetcare.domain.guardian.dto.DetailGuardian;
