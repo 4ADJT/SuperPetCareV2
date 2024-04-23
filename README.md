@@ -40,3 +40,9 @@ A aplicação utiliza um banco de dados relacional Postgres e usa o Flyway para 
 1. Crie um banco de dados PostgreSQL com o nome `super_pet_care`.
 2. Edite o arquivo `application.properties` em `src/main/resources` e configure as propriedades.
 
+## Acesse a documentação Swagger
+http://localhost:8080/swagger-ui/index.html#/
+
+# Autenticação padrão
+- user: administrator
+- password: marmite
