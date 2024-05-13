@@ -35,7 +35,7 @@ public class CartController {
 
     @PostMapping
     @Transactional
-    @Operation(summary = "Registra Carinho", description = "Método responsável exibir registar o carinho.")
+    @Operation(summary = "Registra carrinho", description = "Método responsável exibir e registrar o carrinho.")
     public ResponseEntity<DetailCart> registerCart(@RequestBody @Valid RegisterCart registerCart, UriComponentsBuilder componentsBuilder) {
         CartEntity cartEntity = componentCart.registerCart(registerCart);
         cartRepository.save(cartEntity);
@@ -45,7 +45,7 @@ public class CartController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Detalhar carinho", description = "Método responsável exibir detalhes do carinho.")
+    @Operation(summary = "Detalhar carrinho", description = "Método responsável exibir detalhes do carrinho.")
     public ResponseEntity<DetailCart> detailCats(@PathVariable UUID id) {
         var optionalCartEntity = cartRepository.findById(id);
         return optionalCartEntity.map(cartEntity ->
@@ -54,14 +54,14 @@ public class CartController {
     }
 
     @GetMapping
-    @Operation(summary = "Consultar Carinhos", description = "Método responsável exibir todos os carinho.")
+    @Operation(summary = "Consultar carrinhos", description = "Método responsável exibir todos os carrinhos.")
     public ResponseEntity<Page<DetailCart>> listCats(@PageableDefault(size = 10) Pageable pageable) {
         var page = cartRepository.findAll(pageable).map(DetailCart::new);
         return ResponseEntity.ok(page);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Alterar Carinho", description = "Método responsável alterar os dados do carinho.")
+    @Operation(summary = "Alterar carrinho", description = "Método responsável alterar os dados do carrinho.")
     public ResponseEntity<DetailCart> updateCart(@PathVariable UUID id, @RequestBody @Valid UpdateCart updateCart) {
         var cartEntity = cartRepository.getReferenceById(id);
         cartEntity.update(updateCart);
@@ -69,7 +69,7 @@ public class CartController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Excluir Carinho", description = "Método responsável excluir carinho.")
+    @Operation(summary = "Excluir carrinho", description = "Método responsável excluir carrinho.")
     public ResponseEntity deleteCart(@PathVariable UUID id) {
         cartRepository.deleteById(id);
         return ResponseEntity.noContent().build();

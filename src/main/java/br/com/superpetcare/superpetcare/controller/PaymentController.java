@@ -36,7 +36,7 @@ public class PaymentController {
 
     @PostMapping
     @Transactional
-    @Operation(summary = "Registra pagamento", description = "Método responsável registar o pagamento.")
+    @Operation(summary = "Registra pagamento", description = "Método responsável por registar o pagamento.")
     public ResponseEntity<DetailPayment> registerPayment(@RequestBody @Valid ResgiterPayment resgiterPayment, UriComponentsBuilder componentsBuilder) {
         var payment = componentPayment.registerPayment(resgiterPayment);
         var uri = componentsBuilder.path("payment/{id}").buildAndExpand(payment.getId()).toUri();
@@ -44,21 +44,21 @@ public class PaymentController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Consultar pagamento", description = "Método responsável exibir detalhes do pagamento.")
+    @Operation(summary = "Consultar pagamento", description = "Método responsável por exibir detalhes do pagamento.")
     public ResponseEntity<DetailPayment> detailPayment(@PathVariable UUID id) {
         PaymentEntity paymentEntity = paymentRepository.getReferenceById(id);
         return ResponseEntity.ok(new DetailPayment(paymentEntity));
     }
 
     @GetMapping
-    @Operation(summary = "Consultar pagamentos", description = "Método responsável listar pagamentos.")
+    @Operation(summary = "Consultar pagamentos", description = "Método responsável por listar pagamentos.")
     public ResponseEntity<Page<SimplePayment>> listPayments(@PageableDefault(size = 10) Pageable pageable) {
         var page = paymentRepository.findAll(pageable).map(SimplePayment::new);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/cart/{cartId}")
-    @Operation(summary = "previa do Pagamento", description = "Método responsável exibir a previa do pagamento.")
+    @Operation(summary = "Prévia do Pagamento", description = "Método responsável por exibir a previa do pagamento.")
     public ResponseEntity<DetailPayment> previewPayment(@PathVariable UUID cartId) {
         DetailPayment payment = componentPayment.previewPayment(cartId);
         return ResponseEntity.ok(payment);
@@ -66,7 +66,7 @@ public class PaymentController {
 
     @PutMapping("/{id}")
     @Transactional
-    @Operation(summary = "Atualziar pagameneto", description = "Método responsável pro atualizar o status do pagamento.")
+    @Operation(summary = "Atualizar pagameneto", description = "Método responsável por atualizar o status do pagamento.")
     public ResponseEntity<DetailPayment> updatePayment(@PathVariable UUID id, @RequestBody @Valid UpdatePayment updatePayment) {
         var payment = paymentRepository.getReferenceById(id);
         payment.update(updatePayment);
