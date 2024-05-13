@@ -36,7 +36,7 @@ public class PetController {
 
     @PostMapping
     @Transactional
-    @Operation(summary = "Registar Pet", description = "Método responsável registar o pet.")
+    @Operation(summary = "Registrar Pet", description = "Método responsável por registar o pet.")
     public ResponseEntity<DetailPet> registerPet(@RequestBody @Valid RegisterPet registerPet, UriComponentsBuilder componentsBuilder) {
         PetEntity petEntity = componentPet.registerPet(registerPet);
         petRepository.save(petEntity);
@@ -45,7 +45,7 @@ public class PetController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Detalher Pet", description = "Método responsável detalhar dados so pet.")
+    @Operation(summary = "Detalher Pet", description = "Método responsável por detalhar dados do pet.")
     public ResponseEntity<DetailPet> datailPet(@PathVariable UUID id) {
         var optionalPetEntity = petRepository.findById(id);
         return optionalPetEntity.map(
@@ -54,7 +54,7 @@ public class PetController {
     }
 
     @GetMapping
-    @Operation(summary = "Listar Pets", description = "Método responsável listar todos os pet.")
+    @Operation(summary = "Listar Pets", description = "Método responsável por listar todos os pet.")
     public ResponseEntity<Page<SimplePet>> listPets(@PageableDefault(size = 10, sort = {"name"}) Pageable pageable) {
         var listPet = petRepository.findAll(pageable).map(SimplePet::new);
         return ResponseEntity.ok(listPet);
@@ -70,7 +70,7 @@ public class PetController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Exluir Pet", description = "Método responsável por excluir o pet.")
+    @Operation(summary = "Excluir Pet", description = "Método responsável por excluir o pet.")
     public ResponseEntity DeletePet(@PathVariable UUID id) {
         petRepository.deleteById(id);
         return ResponseEntity.ok().build();

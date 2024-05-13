@@ -32,7 +32,7 @@ public class GuardianController {
 
     @PostMapping
     @Transactional
-    @Operation(summary = "Registra tutores", description = "Método responsável por registrar os tutores dos pets.")
+    @Operation(summary = "Registrar tutores", description = "Método responsável por registrar os tutores dos pets.")
     public ResponseEntity<DetailGuardian> registerGuardian(@RequestBody @Valid RegisterGuardian registerGuardian, UriComponentsBuilder componentsBuilder) {
         var guardian = new GuardianEntity(registerGuardian);
         repository.save(guardian);
@@ -41,14 +41,14 @@ public class GuardianController {
     }
 
     @GetMapping
-    @Operation(summary = "Consultar tutores", description = "Método responsável por listar todos tutores de pets.")
+    @Operation(summary = "Consultar tutores", description = "Método responsável por listar todos os tutores dos pets.")
     public ResponseEntity<Page<SimpleGuardian>> ListGuardian(@PageableDefault(size = 10, sort = {"firstName", "lastName"}) Pageable pageable) {
         var page = repository.findAll(pageable).map(SimpleGuardian::new);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Consultar tutor", description = "Método responsável exibir detalhes do tutor.")
+    @Operation(summary = "Consultar tutor", description = "Método responsável por exibir detalhes do tutor.")
     public ResponseEntity<DetailGuardian> detailGuardian(@PathVariable UUID id) {
         var optionalGuardian = repository.findById(id);
         return optionalGuardian.map(guardian ->

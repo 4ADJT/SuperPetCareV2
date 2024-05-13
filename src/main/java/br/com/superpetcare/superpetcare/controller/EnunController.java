@@ -35,7 +35,7 @@ public class EnunController {
     }
 
     @GetMapping("/gender")
-    @Operation(summary = "Listar genero", description = "Método responsável listar os tipos de generos dos pets.")
+    @Operation(summary = "Listar gênero", description = "Método responsável listar os tipos de gêneros dos pets.")
     public ResponseEntity listGender() {
         var listPetGender = Arrays.stream(PetGender.values()).map(PetGender::getDisplayName).collect(Collectors.toList());
         return ResponseEntity.ok(listPetGender);
